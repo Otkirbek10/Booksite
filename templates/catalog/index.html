@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Main Page</h1>
+<p>Welcome to <em>Ca World of Books </em>. This is a very simple website, written in Django. Developed in Python as an educational example using PyCharm.</p>
+<h2>Dynamic Content</h2>
+
+<p>The database of the World of Books website contains the following number of records:</p>
+<ul>
+    <li><strong>Number of Books:</strong> {{ books }}</li>
+    <li><strong>Number of Book Instances:</strong> {{ instances }}</li>
+    <li><strong>Number of Book Authors:</strong> {{ authors }}</li>
+</ul>
+
+{% endblock %}
