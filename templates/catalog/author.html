@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ author.full_name }} {% endblock %}
+
+{% block active_page_3 %} class="nav-link active" aria-current="page" {% endblock active_page_3 %}
+
+{% block content %}
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3 class="text-success">{{ author.full_name }}</h3>
+            <hr>
+            {% if author.picture %}
+            <img src="{{ author.picture.url }}" class="img-thumbnail" alt="{{ author.full_name}}">
+            {% endif %}
+            <hr>
+            {% if author.date_of_death %}
+            <h5 class="card-text text-left">{{author.date_of_birth|date:"d.m.Y" }} - {{ author.date_of_death|date:"d.m.Y" }} years</h5>
+            {% else %}
+            <h5 class="card-text text-left">Born in  {{author.date_of_birth|date:"d.m.Y" }}
+            {% endif %}
+            <p>{{ author.biography }}</p>
+        </div>
+        <div class="col-md-8">
+            <h3 class="text-danger text-center">{{ author.full_name }}'s all books </h3>
+            <hr>
+            <div class="row">
+                {% for book in books %}
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            {% if book.photo %}
+                            <img src="{{ book.photo.url }}" class="card-img-top" alt="book_image">
+                            {% endif %}
+                            <div class="card-body">
+                                <p class="card-text">{{ book.description|truncatewords:20 }}</p>
+                              <h5 class="card-title text-center">{{ book.title }}</h5>
+                              <a href="{% url 'book_detail' book.book_slug %}" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ book.title }} {% endblock %}
+
+
+
+{% block content %}
+
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <h4 class="text-primary text-center">Book Image</h4>
+            {% if book.photo %}
+            <img src="{{ book.photo.url }}" class="img-thumbnail" alt="{{ book.title }}">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h4 class="text-danger text-center">All information about the book</h4>
+            <table class="table m-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Book</th>
+                    <th scope="col">Information</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Title</th>
+                    <td>{{ book.title }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Genre</th>
+                    <td>{{ book.genre }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Authors</th>
+                    <td>{% for author in book.author.all %} <a href="{% url 'author' author.slug %}">{{ author.full_name }}</a><br> {% endfor %}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Language</th>
+                    <td>{{ book.language }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ISBN Number</th>
+                    <td>{{ book.isbn }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">About the Book</th>
+                    <td>{{ book.description }}</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

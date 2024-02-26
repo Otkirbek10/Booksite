@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %} All Books {% endblock %}
+
+{% block active_page_2 %} class="nav-link active" aria-current="page" {% endblock active_page_2 %}
+
+{% block content %}
+
+    <div>
+        <div class="row">
+            <div class="col-md-2">
+                <h4 class="py-3">All Genres</h4>
+                <nav class="nav flex-column">
+                    <a class="nav-link" aria-current="page" href="{% url 'books' %}">All</a>
+                </nav>
+            </div>
+            <div class="col-md-10">
+                <h4 class="text-center py-3">All Books in the Genre</h4>
+                <div class="row">
+                    {% for book in books %}
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            {% if book.photo %}
+                            <img src="{{ book.photo.url }}" class="card-img-top" alt="book_image">
+                            {% endif %}
+                            <div class="card-body">
+                              <h5 class="card-title text-center">{{ book.title }}</h5>
+                              <p class="card-text">{{ book.description|truncatewords:20 }}</p>
+                              <a href="{% url 'book_detail' book.book_slug %}" class="btn btn-primary">Details</a>
+                              <a href="" class="btn btn-success">Purchase</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
