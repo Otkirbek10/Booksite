@@ -5,7 +5,8 @@ urlpatterns = [
     path('',index,name='index'),
     re_path('^books/$',books_list, name="books"),
     path('book/<slug:book_slug>/',book_detail,name="book_detail"),
-    path("authors/author/<slug:slug>/",book_author,name='author')
+    path("authors/author/<slug:slug>/",book_author,name='author'),
+    path('book/genre/<int:id>/',book_genre, name="book_genre"),
 
 ]
 

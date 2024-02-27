@@ -12,6 +12,9 @@
                 <h4 class="py-3">All Genres</h4>
                 <nav class="nav flex-column">
                     <a class="nav-link" aria-current="page" href="{% url 'books' %}">All</a>
+                    {% for genre in genres %}
+                    <a class="nav-link" href="{% url 'book_genre' genre.pk %}">{{ genre.name }}</a>
+                    {% endfor %}
                 </nav>
             </div>
             <div class="col-md-10">

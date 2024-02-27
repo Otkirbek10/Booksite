@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ genre.name }} {% endblock %}
+
+{% block content %}
+
+<div>
+    <div class="row">
+        <div class="col-md-2">
+            <h4 class="py-3">All genres</h4>
+            <nav class="nav flex-column">
+                <a class="nav-link" aria-current="page" href="{% url 'books' %}">All</a>
+                {% for genre in genres %}
+                <a class="nav-link" href="{% url 'book_genre' genre.pk %}">{{ genre.name }}</a>
+                {% endfor %}
+            </nav>
+        </div>
+        <div class="col-md-10">
+            <h4 class="text-center py-3">All books in <i>{{ genre }}</i> genre</h4>
+            <div class="row">
+                {% for book in books %}
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        {% if book.photo %}
+                        <img src="{{ book.photo.url }}" class="card-img-top" alt="book_image">
+                        {% endif %}
+                        <div class="card-body">
+                          <h5 class="card-title text-center">{{ book.title }}</h5>
+                          <p class="card-text">{{ book.description|truncatewords:30 }}</p>
+                          <a href="{% url 'book_detail' book.book_slug %}" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
