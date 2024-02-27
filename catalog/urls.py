@@ -7,6 +7,7 @@ urlpatterns = [
     path('book/<slug:book_slug>/',book_detail,name="book_detail"),
     path("authors/author/<slug:slug>/",book_author,name='author'),
     path('book/genre/<int:id>/',book_genre, name="book_genre"),
+    path('authors/',authors,name='authors')
 
 ]
 

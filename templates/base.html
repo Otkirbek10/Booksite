@@ -16,16 +16,16 @@
       <div class="col-md-9">
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a {% block active_page_1 %} class="nav-link text-light" {% endblock active_page_1 %} href="{% url 'index' %}">Asosiy sahifa</a>
+            <a {% block active_page_1 %} class="nav-link text-light" {% endblock active_page_1 %} href="{% url 'index' %}">Main Page</a>
           </li>
           <li class="nav-item">
-            <a {% block active_page_2 %} class="nav-link text-light" {% endblock active_page_2 %} href="{% url 'books' %}">Barcha kitoblar</a>
+            <a {% block active_page_2 %} class="nav-link text-light" {% endblock active_page_2 %} href="{% url 'books' %}">All books</a>
           </li>
           <li class="nav-item">
-            <a {% block active_page_3 %} class="nav-link text-light" {% endblock active_page_3 %} href="#">Barcha yozuvchilar</a>
+            <a {% block active_page_3 %} class="nav-link text-light" {% endblock active_page_3 %} href="{% url 'authors' %}">All authors</a>
           </li>
           <li class="nov-item">
-            <a {% block active_page_6 %} class="nav-link text-light" {% endblock active_page_6 %} href="#">Buyurtma berish</a>
+            <a {% block active_page_6 %} class="nav-link text-light" {% endblock active_page_6 %} href="#">Order</a>
           </li>
           <li class="nav-item">
             <a {% block active_page_7 %} class="nav-link text-light" {% endblock active_page_7 %} href="#">{{ request.user }}</a>
@@ -34,17 +34,17 @@
             <a class="nav-link text-light" href="#">Chiqish</a>
           </li>
           <li class="nav-item">
-            <a {% block active_page_4 %} class="nav-link text-light" {% endblock active_page_4 %} href="#">Ro'yhatdan o'tish</a>
+            <a {% block active_page_4 %} class="nav-link text-light" {% endblock active_page_4 %} href="#">Sign up</a>
           </li>
           <li class="nav-item">
-            <a {% block active_page_5 %} class="nav-link text-light" {% endblock active_page_5 %} href="#">Kirish</a>
+            <a {% block active_page_5 %} class="nav-link text-light" {% endblock active_page_5 %} href="#">Log in</a>
           </li>
         </ul>
       </div>
       <div class="col-md-3">
         <form class="d-flex" role="search" action="#">
           <input class="form-control me-2" type="search" placeholder="Qidiruv?" name="query" value="{{ reques.GET.query }}" aria-label="Search">
-          <button class="btn btn-danger" type="submit">Qidirish</button>
+          <button class="btn btn-danger" type="submit">Search</button>
 
         </form>
       </div>

@@ -31,4 +31,9 @@ def book_genre(request,id):
     books = Book.objects.filter(genre_id = id)
     return render(request,'catalog/book_genre.html',{"genre":genre,'books':books,'genres':genres})
 
+def authors(request):
+    authors = Author.objects.all()
+    return render(request,'catalog/authors.html',{"authors":authors})
+
+
     
