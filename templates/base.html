@@ -42,8 +42,8 @@
         </ul>
       </div>
       <div class="col-md-3">
-        <form class="d-flex" role="search" action="#">
-          <input class="form-control me-2" type="search" placeholder="Qidiruv?" name="query" value="{{ reques.GET.query }}" aria-label="Search">
+        <form class="d-flex" role="search" action="{% url 'search'  %}">
+          <input class="form-control me-2" type="search" placeholder="Search?" name="query" value="{{ reques.GET.query }}" aria-label="Search">
           <button class="btn btn-danger" type="submit">Search</button>
 
         </form>
