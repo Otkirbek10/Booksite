@@ -5,6 +5,9 @@ from .models import *
 from django.views import generic
 from django.db.models import Q
 from django.shortcuts import redirect
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
 
 def index(request):
     books = Book.objects.all().count()
@@ -48,3 +51,38 @@ def search(request):
         return render(request,'catalog/search.html',{"books":books})
     else:
         return redirect('books')
+
+def sign_up(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request,user)
+            messages.success(request,'Succesfully registered')
+            return redirect('books')
+
+    return render(request, "account/sign_up.html", {'form': form})
+
+def log_out(request):
+    logout(request)
+    messages.success(request,'Logged out')
+    return redirect('books')
+
+def sign_in(request):
+    form = AuthenticationForm()
+    if request.method == 'POST':
+        form = AuthenticationForm(request,data = request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username,password=password)
+            if user is not None:
+                login(request,user)
+                messages.success('Successfully logged in')
+                return redirect('books')
+            else:
+                messages.debug("Username or password is incorrect")
+        else:
+            messages.error('Incorect information')
+    return render(request,'account/sign_in.html',{"form":form})

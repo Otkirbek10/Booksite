@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Register {% endblock %}
+
+{% block active_page_4 %} class="nav-link active" aria-current="page" {% endblock active_page_4 %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <h1 nlass="text-center mb-5">Register</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

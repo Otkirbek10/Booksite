@@ -8,7 +8,10 @@ urlpatterns = [
     path("authors/author/<slug:slug>/",book_author,name='author'),
     path('book/genre/<int:id>/',book_genre, name="book_genre"),
     path('authors/',authors,name='authors'),
-    path('search/',search,name='search')
+    path('search/',search,name='search'),
+    path('sign_up',sign_up,name='sign_up'),
+    path('log_out',log_out,name='log_out'),
+    path('sign_in',sign_in,name='sign_in')
 
 ]
 

@@ -24,6 +24,7 @@
           <li class="nav-item">
             <a {% block active_page_3 %} class="nav-link text-light" {% endblock active_page_3 %} href="{% url 'authors' %}">All authors</a>
           </li>
+          {% if request.user.is_authenticated %}
           <li class="nov-item">
             <a {% block active_page_6 %} class="nav-link text-light" {% endblock active_page_6 %} href="#">Order</a>
           </li>
@@ -31,14 +32,16 @@
             <a {% block active_page_7 %} class="nav-link text-light" {% endblock active_page_7 %} href="#">{{ request.user }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="#">Chiqish</a>
+            <a class="nav-link text-light" href="{% url 'log_out' %}">Log out</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a {% block active_page_4 %} class="nav-link text-light" {% endblock active_page_4 %} href="{% url 'sign_up' %}">Sign up</a>
           </li>
           <li class="nav-item">
-            <a {% block active_page_4 %} class="nav-link text-light" {% endblock active_page_4 %} href="#">Sign up</a>
+            <a {% block active_page_5 %} class="nav-link text-light" {% endblock active_page_5 %} href="{% url 'sign_in' %}">Sign in</a>
           </li>
-          <li class="nav-item">
-            <a {% block active_page_5 %} class="nav-link text-light" {% endblock active_page_5 %} href="#">Log in</a>
-          </li>
+          {% endif %}
         </ul>
       </div>
       <div class="col-md-3">

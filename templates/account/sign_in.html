@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{ load crispy_forms_tags }
+
+{% block title %} Logging in {% endblock %}
+
+{% block active_page_5 %} class="nav-link active" aria-current="page" {% endblock active_page_5 %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <h1 class="text-center mb-5">Log in</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Log in</button><br><br><br>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
