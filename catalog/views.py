@@ -80,7 +80,7 @@ def sign_in(request):
             user = authenticate(username=username,password=password)
             if user is not None:
                 login(request,user)
-                messages.success(request,'Successfully logged in')
+                messages.success(request,'Successfully logged in',fail_silently=False)
                 return redirect('books')
             else:
                 messages.debug(request,"Username or password is incorrect")

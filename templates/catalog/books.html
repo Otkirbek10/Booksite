@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %} All Books {% endblock %}
 
 {% block active_page_2 %} class="nav-link active" aria-current="page" {% endblock active_page_2 %}
@@ -46,4 +46,12 @@
             </div>
         </div>
     </div>
+    <script>
+        var successMessages = document.querySelectorAll('.alert-success');
+        if (successMessages.length > 0) {
+            var notificationSound = new Audio('{% static "js/simple.mp3" %}');
+            notificationSound.play();
+        }
+    </script>
+
 {% endblock %}
