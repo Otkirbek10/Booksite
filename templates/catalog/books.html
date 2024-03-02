@@ -5,6 +5,13 @@
 {% block active_page_2 %} class="nav-link active" aria-current="page" {% endblock active_page_2 %}
 
 {% block content %}
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
 
     <div>
         <div class="row">

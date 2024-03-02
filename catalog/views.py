@@ -14,17 +14,6 @@ def index(request):
     authors = Author.objects.all().count()
     return render(request,'catalog/index.html',context={'books':books,'authors':authors})
 
-def sign_up(request):
-    form = UserCreationForm()
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request,user)
-            messages.success(request,'Succesfully registered')
-            return redirect('books')
-
-    return render(request, "account/sign_up.html", {'form': form})
 
 
 def books_list(request): 
@@ -74,7 +63,7 @@ def sign_up(request):
             messages.success(request,'Succesfully registered')
             return redirect('books')
 
-    return render(request, "account/sign_up.html", {'form': form})
+    return render(request, "account/sign_up.html", {'form': form,})
 
 def log_out(request):
     logout(request)
@@ -98,3 +87,4 @@ def sign_in(request):
         else:
             messages.error(request,'Incorect information')
     return render(request,'account/sign_in.html',{"form":form})
+
