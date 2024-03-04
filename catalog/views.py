@@ -8,10 +8,12 @@ from django.shortcuts import redirect
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from django.core.paginator import EmptyPage,PageNotAnInteger,Paginator
 
 def index(request):
     books = Book.objects.all().count()
     authors = Author.objects.all().count()
+    messages.success(request,'Welcome')
     return render(request,'catalog/index.html',context={'books':books,'authors':authors})
 
 
@@ -19,6 +21,15 @@ def index(request):
 def books_list(request): 
     genres = Genre.objects.all()
     books = Book.objects.all()
+    paginator = Paginator(books,3)
+    page = request.GET.get('page')
+    print(request.GET)
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
     return render(request, "catalog/books.html", {'genres': genres, 'books': books}) 
 
 

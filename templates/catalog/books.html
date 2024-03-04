@@ -43,15 +43,9 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% include 'catalog/pagination.html' with page=books  %}
             </div>
         </div>
     </div>
-    <script>
-        var successMessages = document.querySelectorAll('.alert-success');
-        if (successMessages.length > 0) {
-            var notificationSound = new Audio('{% static "js/simple.mp3" %}');
-            notificationSound.play();
-        }
-    </script>
 
 {% endblock %}

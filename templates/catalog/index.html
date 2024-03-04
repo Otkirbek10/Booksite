@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %} Main Page {% endblock %}
 
 {% block active_page_1 %} class="nav-link active" aria-current="page" {% endblock active_page_1 %}
 
 {% block content %}
-
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
     <h1 class="text-center py-5">Main Page</h1>
     <ul>
         <li>
@@ -18,5 +24,12 @@
             Total orders: {{ oreders }} ta
         </li>
     </ul>
+    <script>
+        var successMessages = document.querySelectorAll('.alert-success');
+        if (successMessages.length > 0) {
+            var notificationSound = new Audio('{% static "js/simple.mp3" %}');
+            notificationSound.play();
+        }
+    </script>
 
 {% endblock %}
