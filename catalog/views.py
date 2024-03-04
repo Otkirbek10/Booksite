@@ -23,7 +23,6 @@ def books_list(request):
     books = Book.objects.all()
     paginator = Paginator(books,3)
     page = request.GET.get('page')
-    print(request.GET)
     try:
         books = paginator.page(page)
     except PageNotAnInteger:
@@ -99,3 +98,16 @@ def sign_in(request):
             messages.error(request,'Incorect information')
     return render(request,'account/sign_in.html',{"form":form})
 
+def edit_book(request,book_slug):
+    book = Book.objects.get(book_slug=book_slug)
+    if request.method == 'POST':
+        book.title = request.POST.get('title')
+        book.save()
+        return redirect('/')
+    return render(request,'catalog/edit.html',{'book':book})
+
+def delete_book(request,book_slug):
+    book = get_object_or_404(Book,book_slug = book_slug)
+    book.delete()
+    return redirect('/')
+    
