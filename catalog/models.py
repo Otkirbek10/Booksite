@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Book(models.Model):
     title = models.CharField(max_length=200,verbose_name='Title of a book')
@@ -64,3 +65,13 @@ class BookInstance(models.Model):
 
     def __str__(self):
         return '%s - %s - %s' % (self.inv_nom, self.book, self.status)
+
+class Comments(models.Model):
+    author = models.ForeignKey(User,related_name='comments_authored',on_delete=models.CASCADE)
+    book = models.ForeignKey(User,related_name='comments',on_delete=models.CASCADE)
+    body = models.TextField(max_length=500)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+  
+    def __str__(self):
+        return f"{self.author.username} - {self.body}"

@@ -13,7 +13,8 @@ urlpatterns = [
     path('log_out',log_out,name='log_out'),
     path('sign_in',sign_in,name='sign_in'),
     path('edit/<slug:book_slug>/',edit_book,name='edit'),
-    path('delete/<slug:book_slug>/',delete_book,name='delete')
+    path('delete/<slug:book_slug>/',delete_book,name='delete'),
+
 
 ]
 

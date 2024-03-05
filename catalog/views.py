@@ -110,4 +110,13 @@ def delete_book(request,book_slug):
     book = get_object_or_404(Book,book_slug = book_slug)
     book.delete()
     return redirect('/')
+
+def comment(request,book_slug):
+    book = get_object_or_404(Book,book_slug = book_slug)
+    if request.method == 'POST':
+        comment_text = request.POST.get('comment')
+        if comment_text:
+            book.comments.create(body = comment_text,author = request.user)
+            return redirect('book_detail', book_slug = book_slug)
+    return redirect(request,'catalog/comment.html',{'book':book})
     
