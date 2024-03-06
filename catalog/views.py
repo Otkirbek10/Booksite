@@ -9,6 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.core.paginator import EmptyPage,PageNotAnInteger,Paginator
+from .forms import CommentForm
 
 def index(request):
     books = Book.objects.all().count()
@@ -34,7 +35,17 @@ def books_list(request):
 
 def book_detail(request, book_slug):
     book = get_object_or_404(Book, book_slug=book_slug)
-    return render(request,'catalog/book_detail.html', {'book': book})
+    form = CommentForm(request.POST)
+    
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.book = book
+        new_comment.author = request.user
+        new_comment.save()
+    else:
+        form = CommentForm()
+    comments = Comments.objects.filter(book=book).order_by('-created') 
+    return render(request,'catalog/book_detail.html', {'book': book,'comments':comments,'form':form})
 
 def book_author(request,slug):
     author = get_object_or_404(Author,slug=slug)
@@ -111,12 +122,3 @@ def delete_book(request,book_slug):
     book.delete()
     return redirect('/')
 
-def comment(request,book_slug):
-    book = get_object_or_404(Book,book_slug = book_slug)
-    if request.method == 'POST':
-        comment_text = request.POST.get('comment')
-        if comment_text:
-            book.comments.create(body = comment_text,author = request.user)
-            return redirect('book_detail', book_slug = book_slug)
-    return redirect(request,'catalog/comment.html',{'book':book})
-    

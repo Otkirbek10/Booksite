@@ -68,10 +68,13 @@ class BookInstance(models.Model):
 
 class Comments(models.Model):
     author = models.ForeignKey(User,related_name='comments_authored',on_delete=models.CASCADE)
-    book = models.ForeignKey(User,related_name='comments',on_delete=models.CASCADE)
+    book = models.ForeignKey(Book,related_name='comments',on_delete=models.CASCADE)
     body = models.TextField(max_length=500)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created']
   
     def __str__(self):
         return f"{self.author.username} - {self.body}"
