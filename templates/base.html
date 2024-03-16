@@ -26,10 +26,10 @@
           </li>
           {% if request.user.is_authenticated %}
           <li class="nov-item">
-            <a {% block active_page_6 %} class="nav-link text-light" {% endblock active_page_6 %} href="#">Order</a>
+            <a {% block active_page_6 %} class="nav-link text-light" {% endblock active_page_6 %} href="{% url 'order' %}">Order</a>
           </li>
           <li class="nav-item">
-            <a {% block active_page_7 %} class="nav-link text-light" {% endblock active_page_7 %} href="#">{{ request.user }}</a>
+            <a {% block active_page_7 %} class="nav-link text-light" {% endblock active_page_7 %} href="{% url 'user_order' %}">{{ request.user }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-light" href="{% url 'log_out' %}">Log out</a>

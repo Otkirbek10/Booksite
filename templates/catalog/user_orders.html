@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ request.user }}'s orders {% endblock %}
+
+{% block active_page_7 %} class="nav-link active" aria-current='page' {% endblock active_page_7 %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-6 offset-3 p-5">
+        <h2 class="text-center">Status of orders</h2>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Book</th>
+                <th scope="col">Imprint</th>
+                <th scope="col">Status</th>
+                <th class="col">Due</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for book_instance in orders %}
+                <tr>
+                    <th scope="row">{{ book_instance.pk }}</th>
+                    <td>{{ book_instance.book.title }}</td>
+                    <td>{{ book_instance.imprint }}</td>
+                    <td>{{ book_instance.status }}</td>
+                    <td>{{ book_instance.due_back }}</td>
+                </tr>
+                {% empty %}
+                <li class="list-group-item">No orders found.</li>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+{% endblock %}

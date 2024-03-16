@@ -9,7 +9,8 @@ from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.core.paginator import EmptyPage,PageNotAnInteger,Paginator
-from .forms import CommentForm
+from .forms import CommentForm,BookOrderForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     books = Book.objects.all().count()
@@ -56,7 +57,12 @@ def book_genre(request,id):
     genre = Genre.objects.get(pk = id)
     genres = Genre.objects.all()
     books = Book.objects.filter(genre_id = id)
-    return render(request,'catalog/book_genre.html',{"genre":genre,'books':books,'genres':genres})
+    if len(books) < 1:
+        messages.error(request,'Sorry we have no books in this category right now')
+        return redirect('books')
+        
+    else:
+        return render(request,'catalog/book_genre.html',{"genre":genre,'books':books,'genres':genres})
 
 def authors(request):
     authors = Author.objects.all()
@@ -122,3 +128,26 @@ def delete_book(request,book_slug):
     book.delete()
     return redirect('/')
 
+@login_required(login_url='sign_in')
+def order_book(request):
+    form = BookOrderForm()
+    if request.method == "POST":
+        form = BookOrderForm(request.POST)
+        if form.is_valid():
+            book = form.cleaned_data.get('book')
+            imprint = form.cleaned_data.get('imprint')
+            user = request.user
+            book_instance = BookInstance(book=book, imprint=imprint,user=user)
+            book_instance.save()
+            messages.info(request, "Order has been accepted")
+            return redirect('books')
+    return render(request, "catalog/order_book.html", {'form': form})
+
+@login_required(login_url='sign_in')
+def user_order(request):
+    orders = BookInstance.objects.filter(user=request.user)
+    if len(orders) < 1:
+        messages.info(request,"You haven't ordered any book\nLet's order it")
+        return redirect('order')
+    else:
+        return render(request, "catalog/user_orders.html", {'orders': orders})

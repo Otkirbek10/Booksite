@@ -14,6 +14,8 @@ urlpatterns = [
     path('sign_in',sign_in,name='sign_in'),
     path('edit/<slug:book_slug>/',edit_book,name='edit'),
     path('delete/<slug:book_slug>/',delete_book,name='delete'),
+    path('order/',order_book, name="order"),
+    path('user_order/',user_order,name='user_order')
 
 
 ]
